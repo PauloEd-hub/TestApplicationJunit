@@ -1,5 +1,7 @@
 package br.ce.wcaquino.service;
 
+import static matchers.MatchersProprios.caiEm;
+import static matchers.MatchersProprios.caiNumaSegunda;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
@@ -33,6 +35,8 @@ import br.ce.wcaquino.exceptions.FilmeSemEstoqueException;
 import br.ce.wcaquino.exceptions.LocadoraException;
 import br.ce.wcaquino.servicos.LocacaoService;
 import br.ce.wcaquino.utils.DataUtils;
+import matchers.DiaSemanaMatcher;
+import matchers.MatchersProprios;
 
 public class LocacaoServiceTest {
 	
@@ -215,8 +219,14 @@ public class LocacaoServiceTest {
 		Locacao retorno = service.alugarFilme(usuario, filmes);
 		
 		//verificacao
-		boolean ehSegunda = DataUtils.verificarDiaSemana(retorno.getDataRetorno(), Calendar.MONDAY);
-		Assert.assertTrue(ehSegunda);
+//		boolean ehSegunda = DataUtils.verificarDiaSemana(retorno.getDataRetorno(), Calendar.MONDAY);
+//		Assert.assertTrue(ehSegunda);
+//		assertThat(retorno.getDataRetorno(), new DiaSemanaMatcher(Calendar.MONDAY));
+//		assertThat(retorno.getDataRetorno(), caiEm(Calendar.MONDAY));
+//		assertThat(retorno.getDataRetorno(), caiEm(Calendar.MONDAY));
+		assertThat(retorno.getDataRetorno(), caiNumaSegunda());
+		
+		
 	}
 //	@Test
 //	public void testLocacao_filmeSemEstoque2() {
